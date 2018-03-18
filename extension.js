@@ -44,7 +44,11 @@ class OnMessage {
 
     if (this.editor === null) {
       this.editorTitle = request.title;
-      tmp.file((err, path, fd, cleanupCallback) => {
+      tmp.file({
+        postfix: '.html'
+      }, (err, path, fd, cleanupCallback) => {
+        console.log("File: ", path);
+        console.log("Filedescriptor: ", fd);
         this.cleanupCallback = cleanupCallback;
 
         workspace.openTextDocument(path).then(textDocument => {
